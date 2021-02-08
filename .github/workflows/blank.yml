@@ -14,7 +14,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Stahni METAR zpravu z NOAA
       run: |-
-        wget -q -O brno.txt https://tgftp.nws.noaa.gov/data/observations/metar/stations/LKTB.TXT
+        wget -q -O testy-pcr-antigenni.csv https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy-pcr-antigenni.csv
     - name: Uloz zpravu do repozitare
       run: |-
         git config user.name "Automated"
