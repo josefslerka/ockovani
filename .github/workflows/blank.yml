@@ -23,3 +23,14 @@ jobs:
         timestamp=$(date -u)
         git commit -m "Posledni data: ${timestamp}" || exit 0
         git push
+    - name: Přehled vykázaných očkování podle míst
+      run: |-
+        wget -q -O ockovani-podle-mis.csv https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/ockovaci-mista.csv
+    - name: Uloz zpravu do repozitare
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Posledni data: ${timestamp}" || exit 0
+        git push
