@@ -1,4 +1,4 @@
-name: Automaticke stahovani dat z NOAA
+name: Automaticke stahovani dat z MZ CR
 
 on:
   push:
@@ -12,9 +12,9 @@ jobs:
     steps:
     - name: Propojeni s repozitarem
       uses: actions/checkout@v2
-    - name: Stahni METAR zpravu z NOAA
+    - name: Přehled vykázaných očkování podle krajů ČR
       run: |-
-        wget -q -O testy-pcr-antigenni.csv https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/testy-pcr-antigenni.csv
+        wget -q -O ockovani-podle-kraju.csv https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/ockovani.csv
     - name: Uloz zpravu do repozitare
       run: |-
         git config user.name "Automated"
@@ -23,3 +23,15 @@ jobs:
         timestamp=$(date -u)
         git commit -m "Posledni data: ${timestamp}" || exit 0
         git push
+ - name: Přehled vykázaných očkování podle očkovacích míst ČR
+      run: |-
+        wget -q -O ockovani-podle-ockovaciho-mista.csv https://onemocneni-aktualne.mzcr.cz/api/v2/covid-19/ockovaci-mista.csv
+    - name: Uloz zpravu do repozitare
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Posledni data: ${timestamp}" || exit 0
+        git push
+
